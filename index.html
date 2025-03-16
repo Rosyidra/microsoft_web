@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft - Reset Password</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right bottom, #f5e6e6, #e6f0e6);
+        }
+
+        .reset-container {
+            background-color: white;
+            width: 380px;
+            padding: 28px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+        }
+
+        .microsoft-logo {
+            margin-bottom: 16px;
+        }
+
+        .microsoft-logo img {
+            height: 20px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 500;
+            margin: 16px 0;
+            color: #333;
+        }
+
+        .input-group {
+            margin: 16px 0;
+        }
+
+        .input-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 6px 0;
+            margin-top: 4px;
+            border: none;
+            border-bottom: 1px solid #8e8e8e;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .input-field:focus {
+            border-bottom: 1px solid #0067b8;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+
+        .cancel-button {
+            background-color: #e1e1e1;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .next-button {
+            background-color: #0067b8;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="reset-container">
+        <div class="microsoft-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft">
+        </div>
+        <h1>Reset your password</h1>
+        
+        <div class="input-group">
+            <div class="input-label">New password</div>
+            <input type="password" class="input-field" id="new-password">
+            <div class="error-message" id="error-new-password">Please enter a new password</div>
+        </div>
+        
+        <div class="input-group">
+            <div class="input-label">Reenter password</div>
+            <input type="password" class="input-field" id="reenter-password">
+            <div class="error-message" id="error-reenter-password">Passwords do not match</div>
+        </div>
+        
+        <div class="button-container">
+            <button class="cancel-button" onclick="window.location.href = 'main.html'">Cancel</button>
+            <button class="next-button" onclick="validateForm()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            let newPassword = document.getElementById("new-password").value.trim();
+            let reenterPassword = document.getElementById("reenter-password").value.trim();
+            let errorNewPassword = document.getElementById("error-new-password");
+            let errorReenterPassword = document.getElementById("error-reenter-password");
+            let isValid = true;
+
+            // Validasi jika input kosong
+            if (newPassword === "") {
+                errorNewPassword.style.display = "block";
+                errorNewPassword.innerText = "Please enter a new password";
+                isValid = false;
+            } else {
+                errorNewPassword.style.display = "none";
+            }
+
+            if (reenterPassword === "") {
+                errorReenterPassword.style.display = "block";
+                errorReenterPassword.innerText = "Please re-enter your password";
+                isValid = false;
+            } else {
+                errorReenterPassword.style.display = "none";
+            }
+
+            // Validasi jika password tidak sama
+            if (newPassword !== "" && reenterPassword !== "" && newPassword !== reenterPassword) {
+                errorReenterPassword.style.display = "block";
+                errorReenterPassword.innerText = "Passwords do not match";
+                isValid = false;
+            }
+
+            // Jika valid, arahkan ke halaman login.html
+            if (isValid) {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>
